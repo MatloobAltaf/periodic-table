@@ -22,13 +22,13 @@ const ElementDetail: React.FC<ElementDetailProps> = ({ element, onClose }) => {
   const colors = CATEGORY_COLORS[element.category];
 
   return (
-    <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
+    <div className="fixed inset-0 bg-black bg-opacity-50 max-h-[100vh] flex items-center justify-center z-50">
       <div
-        className="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto 
+        className="bg-white dark:bg-gray-800 rounded-lg max-w-2xl w-full max-h-[95vh] overflow-y-auto 
                       shadow-2xl border border-gray-200 dark:border-gray-700">
         {/* Header */}
         <div
-          className={`${colors.bg} ${colors.border} p-6 rounded-t-2xl border-b-2`}>
+          className={`${colors.bg} ${colors.border} p-6 rounded-lg border-b-2`}>
           <div className="flex items-center justify-between">
             <div className="flex items-center space-x-4">
               <div
@@ -231,7 +231,7 @@ const ElementDetail: React.FC<ElementDetailProps> = ({ element, onClose }) => {
                     Shell {shellIndex + 1}
                   </div>
                   <div
-                    className="w-12 h-12 rounded-full border-2 border-blue-300 dark:border-blue-600 
+                    className="w-12 h-12 rounded-lg border-2 border-blue-300 dark:border-blue-600 
                                 flex items-center justify-center bg-blue-50 dark:bg-blue-900/20">
                     <span className="text-lg font-bold text-blue-700 dark:text-blue-300">
                       {electrons}

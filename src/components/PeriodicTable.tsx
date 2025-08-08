@@ -113,103 +113,104 @@ const PeriodicTable: React.FC = () => {
   const periodicGrid = createPeriodicGrid();
 
   return (
-    <div className="space-y-6">
-      <SearchAndFilters
-        searchTerm={searchTerm}
-        onSearchChange={setSearchTerm}
-        filters={filters}
-        onFilterChange={setFilters}
-        onClearFilters={handleClearFilters}
-      />
+    <div>
+      <div className="space-y-6">
+        <SearchAndFilters
+          searchTerm={searchTerm}
+          onSearchChange={setSearchTerm}
+          filters={filters}
+          onFilterChange={setFilters}
+          onClearFilters={handleClearFilters}
+        />
 
-      <div className="text-sm text-gray-600 dark:text-gray-400">
-        Showing {filteredElements.length} of {elements.length} elements
-      </div>
-
-      <div className="overflow-x-auto p-4">
-        <div className="min-w-max">
-          {periodicGrid.map((row, periodIndex) => (
-            <div key={periodIndex} className="flex gap-2 mb-2">
-              {row.map((element, groupIndex) => {
-                const isDimmed =
-                  isFilterActive && element
-                    ? !filteredElementSet.has(element.atomicNumber)
-                    : false;
-
-                return (
-                  <div
-                    key={`${periodIndex}-${groupIndex}`}
-                    className="w-16 h-20">
-                    {element && (
-                      <ElementTile
-                        element={element}
-                        onClick={handleElementClick}
-                        isDimmed={isDimmed}
-                      />
-                    )}
-                  </div>
-                );
-              })}
-            </div>
-          ))}
+        <div className="text-sm text-gray-600 dark:text-gray-400">
+          Showing {filteredElements.length} of {elements.length} elements
         </div>
 
-        {/* Lanthanides and Actinides */}
-        <div className="mt-8 space-y-4">
-          <div className="flex flex-row gap-2 ml-32">
-            <h4
-              className={`text-sm font-medium mb-2 flex items-center gap-2 ${CATEGORY_COLORS["lanthanides"].text}`}>
-              Lanthanides
-            </h4>
-            <div className="flex gap-2">
-              {elements
-                .filter((el) => el.category === "lanthanides")
-                .sort((a, b) => a.atomicNumber - b.atomicNumber)
-                .map((element) => {
-                  const isDimmed = isFilterActive
-                    ? !filteredElementSet.has(element.atomicNumber)
-                    : false;
+        <div className="overflow-x-auto p-4">
+          <div className="min-w-max">
+            {periodicGrid.map((row, periodIndex) => (
+              <div key={periodIndex} className="flex gap-2 mb-2">
+                {row.map((element, groupIndex) => {
+                  const isDimmed =
+                    isFilterActive && element
+                      ? !filteredElementSet.has(element.atomicNumber)
+                      : false;
+
                   return (
-                    <div key={element.atomicNumber} className="w-16 h-20">
-                      <ElementTile
-                        element={element}
-                        onClick={handleElementClick}
-                        isDimmed={isDimmed}
-                      />
+                    <div
+                      key={`${periodIndex}-${groupIndex}`}
+                      className="w-16 h-20">
+                      {element && (
+                        <ElementTile
+                          element={element}
+                          onClick={handleElementClick}
+                          isDimmed={isDimmed}
+                        />
+                      )}
                     </div>
                   );
                 })}
-            </div>
+              </div>
+            ))}
           </div>
 
-          <div className="flex flex-row gap-2 ml-36">
-            <h4
-              className={`text-sm font-medium mb-2 flex items-center gap-2 ${CATEGORY_COLORS["actinides"].text}`}>
-              Actinides
-            </h4>
-            <div className="flex gap-2">
-              {elements
-                .filter((el) => el.category === "actinides")
-                .sort((a, b) => a.atomicNumber - b.atomicNumber)
-                .map((element) => {
-                  const isDimmed = isFilterActive
-                    ? !filteredElementSet.has(element.atomicNumber)
-                    : false;
-                  return (
-                    <div key={element.atomicNumber} className="w-16 h-20">
-                      <ElementTile
-                        element={element}
-                        onClick={handleElementClick}
-                        isDimmed={isDimmed}
-                      />
-                    </div>
-                  );
-                })}
+          {/* Lanthanides and Actinides */}
+          <div className="mt-8 space-y-4">
+            <div className="flex flex-row gap-2 ml-32">
+              <h4
+                className={`text-sm font-medium mb-2 flex items-center gap-2 ${CATEGORY_COLORS["lanthanides"].text}`}>
+                Lanthanides
+              </h4>
+              <div className="flex gap-2">
+                {elements
+                  .filter((el) => el.category === "lanthanides")
+                  .sort((a, b) => a.atomicNumber - b.atomicNumber)
+                  .map((element) => {
+                    const isDimmed = isFilterActive
+                      ? !filteredElementSet.has(element.atomicNumber)
+                      : false;
+                    return (
+                      <div key={element.atomicNumber} className="w-16 h-20">
+                        <ElementTile
+                          element={element}
+                          onClick={handleElementClick}
+                          isDimmed={isDimmed}
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
+            </div>
+
+            <div className="flex flex-row gap-2 ml-36">
+              <h4
+                className={`text-sm font-medium mb-2 flex items-center gap-2 ${CATEGORY_COLORS["actinides"].text}`}>
+                Actinides
+              </h4>
+              <div className="flex gap-2">
+                {elements
+                  .filter((el) => el.category === "actinides")
+                  .sort((a, b) => a.atomicNumber - b.atomicNumber)
+                  .map((element) => {
+                    const isDimmed = isFilterActive
+                      ? !filteredElementSet.has(element.atomicNumber)
+                      : false;
+                    return (
+                      <div key={element.atomicNumber} className="w-16 h-20">
+                        <ElementTile
+                          element={element}
+                          onClick={handleElementClick}
+                          isDimmed={isDimmed}
+                        />
+                      </div>
+                    );
+                  })}
+              </div>
             </div>
           </div>
         </div>
       </div>
-
       <ElementDetail element={selectedElement} onClose={handleCloseDetail} />
     </div>
   );
